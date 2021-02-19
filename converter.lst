@@ -1,0 +1,365 @@
+     1                                  bits 32
+     2                                  global start
+     3                                  extern exit,fopen,fread,fprintf,fclose
+     4                                  import exit msvcrt.dll 
+     5                                  import fopen msvcrt.dll 
+     6                                  import fread msvcrt.dll 
+     7                                  import fprintf msvcrt.dll 
+     8                                  import fclose msvcrt.dll
+     9                                  segment data use32 class=data
+    10 00000000 696E7075742E747874-         file_name db "input.txt", 0
+    10 00000009 00                 
+    11 0000000A 7200                        access_mode db "r", 0
+    12 0000000C FFFFFFFF                    input_file_descriptor dd -1
+    13 00000010 636F6E766572746564-         output_file_name db "converted_code.txt",0
+    13 00000019 5F636F64652E747874-
+    13 00000022 00                 
+    14 00000023 772B00                      output_access_mode db 'w+',0
+    15 00000026 FFFFFFFF                    output_file_descriptor dd -1
+    16 0000002A 00                          sign db 0
+    17 0000002B 626974732033320A67-         start_code db "bits 32",10,"global start",10,"extern exit,printf,scanf",10,"import exit msvcrt.dll",10,"import printf msvcrt.dll",10,"import scanf msvcrt.dll",10,"segment data use32 class=data",10,"   data_segme
+    17 00000034 6C6F62616C20737461-
+    17 0000003D 72740A65787465726E-
+    17 00000046 20657869742C707269-
+    17 0000004F 6E74662C7363616E66-
+    17 00000058 0A696D706F72742065-
+    17 00000061 786974206D73766372-
+    17 0000006A 742E646C6C0A696D70-
+    17 00000073 6F7274207072696E74-
+    17 0000007C 66206D73766372742E-
+    17 00000085 646C6C0A696D706F72-
+    17 0000008E 74207363616E66206D-
+    17 00000097 73766372742E646C6C-
+    17 000000A0 0A7365676D656E7420-
+    17 000000A9 646174612075736533-
+    17 000000B2 3220636C6173733D64-
+    17 000000BB 6174610A2020206461-
+    17 000000C4 74615F7365676D656E-
+    17 000000CD 742074696D65732033-
+    17 000000D6 303030302064622030-
+    17 000000DF 0A202020666F726D61-
+    17 000000E8 742064622022252563-
+    17 000000F1 222C300A7365676D65-
+    17 000000FA 6E7420636F64652075-
+    17 00000103 7365333220636C6173-
+    17 0000010C 733D636F64650A7374-
+    17 00000115 6172743A0A2020206D-
+    17 0000011E 6F76204553492C6461-
+    17 00000127 74615F7365676D656E-
+    17 00000130 740A00             
+    18 00000133 202020707573682064-         end_code db "   push dword 0",10,"   call [exit]",0
+    18 0000013C 776F726420300A2020-
+    18 00000145 2063616C6C205B6578-
+    18 0000014E 69745D00           
+    19 00000152 696E63204553490A00          instruction_1 db "inc ESI",10,0
+    20 0000015B 646563204553490A00          instruction_2 db "dec ESI",10,0
+    21 00000164 696E63206279746520-         instruction_3 db "inc byte [ESI]",10,0
+    21 0000016D 5B4553495D0A00     
+    22 00000174 646563206279746520-         instruction_4 db "dec byte [ESI]",10,0
+    22 0000017D 5B4553495D0A00     
+    23                                      
+    24 00000184 7075736861640A00            instruction_5_1 db "pushad",10,0
+    25 0000018C 6D6F76204541582C30-         instruction_5_2 db "mov EAX,0",10,0
+    25 00000195 0A00               
+    26 00000197 6D6F7620414C2C5B45-         instruction_5_3 db "mov AL,[ESI]",10,0
+    26 000001A0 53495D0A00         
+    27 000001A5 707573682064776F72-         instruction_5_4 db "push dword EAX",10,0
+    27 000001AE 64204541580A00     
+    28 000001B5 707573682064776F72-         instruction_5_5 db "push dword format",10,0
+    28 000001BE 6420666F726D61740A-
+    28 000001C7 00                 
+    29 000001C8 63616C6C205B707269-         instruction_5_6 db "call [printf]",10,0
+    29 000001D1 6E74665D0A00       
+    30 000001D7 616464206573702C34-         instruction_5_7 db "add esp,4*2",10,0
+    30 000001E0 2A320A00           
+    31 000001E4 706F7061640A00              instruction_5_8 db "popad",10,0
+    32                                      
+    33 000001EB 7075736861640A00            instruction_6_1 db "pushad",10,0
+    34 000001F3 707573682064776F72-         instruction_6_2 db "push dword ESI",10,0
+    34 000001FC 64204553490A00     
+    35 00000203 707573682064776F72-         instruction_6_3 db "push dword format",10,0
+    35 0000020C 6420666F726D61740A-
+    35 00000215 00                 
+    36 00000216 63616C6C205B736361-         instruction_6_4 db "call [scanf]",10,0
+    36 0000021F 6E665D0A00         
+    37 00000224 616464206573702C34-         instruction_6_5 db "add esp,4*2",10,0
+    37 0000022D 2A320A00           
+    38 00000231 706F7061640A00              instruction_6_6 db "popad",10,0
+    39                                      
+    40 00000238 6C6F6F705F00                instruction_7_1 db "loop_",0
+    41 0000023E 3A0A00                      instruction_7_2 db ":",10,0
+    42                                      
+    43 00000241 636D70206279746520-         instruction_8_1 db "cmp byte [ESI],0",10,0
+    43 0000024A 5B4553495D2C300A00 
+    44 00000253 6A67206C6F6F705F00          instruction_8_2 db "jg loop_",0
+    45                                      
+    46 0000025C 256400                      number_print_format db "%d",0
+    47 0000025F 0A00                        endl_print_format db 10,0
+    48 00000261 0000                        number_of_loops dw 0
+    49 00000263 0000<rept>                  active_loops times 1000 dw 0
+    50 00000A33 20202000                    indentation db "   ",0
+    51                                  segment code use32 class=code
+    52                                  indent:
+    53 00000000 89F8                        mov EAX,EDI
+    54 00000002 2D[63020000]                sub EAX,active_loops
+    55 00000007 66BA0000                    mov DX,0
+    56 0000000B 66BB0200                    mov BX,2
+    57 0000000F 66F7F3                      div BX
+    58 00000012 6640                        inc AX
+    59 00000014 6683F800                    cmp AX,0
+    60 00000018 741E                        je to_return
+    61                                      do_indent:
+    62 0000001A 60                              pushad 
+    63 0000001B 68[330A0000]                    push indentation
+    64 00000020 FF35[26000000]                  push dword [output_file_descriptor]
+    65 00000026 FF15[00000000]                  call [fprintf]
+    66 0000002C 83C408                          add esp, 4*2
+    67 0000002F 61                              popad
+    68 00000030 6648                            dec AX
+    69 00000032 6683F800                        cmp AX,0
+    70 00000036 75E2                            jne do_indent
+    71                                      to_return:
+    72 00000038 C3                          ret
+    73                                  start:
+    74 00000039 68[0A000000]                push dword access_mode
+    75 0000003E 68[00000000]                push dword file_name
+    76 00000043 FF15[00000000]              call [fopen]
+    77 00000049 83C408                      add esp, 4*2       
+    78 0000004C 83F800                      cmp eax, 0                  
+    79 0000004F 0F84AA030000                je final
+    80 00000055 A3[0C000000]                mov [input_file_descriptor], eax
+    81                                      
+    82 0000005A 68[23000000]                push dword output_access_mode
+    83 0000005F 68[10000000]                push dword output_file_name
+    84 00000064 FF15[00000000]              call [fopen]
+    85 0000006A 83C408                      add esp, 4*2       
+    86 0000006D 83F800                      cmp eax, 0                  
+    87 00000070 0F8489030000                je final
+    88 00000076 A3[26000000]                mov [output_file_descriptor], eax
+    89 0000007B 60                          pushad
+    90 0000007C 68[2B000000]                    push dword start_code
+    91 00000081 FF35[26000000]                  push dword [output_file_descriptor]
+    92 00000087 FF15[00000000]                  call [fprintf]
+    93 0000008D 83C408                          add esp, 4*2
+    94 00000090 61                              popad 
+    95 00000091 BF[63020000]                mov EDI,active_loops
+    96                                          bucla:
+    97 00000096 60                                  pushad
+    98                                                  ;this will read a single char
+    99 00000097 FF35[0C000000]                          push dword [input_file_descriptor]
+   100 0000009D 6A01                                    push dword 1
+   101 0000009F 6A01                                    push dword 1
+   102 000000A1 68[2A000000]                            push dword sign
+   103 000000A6 FF15[00000000]                          call [fread]
+   104 000000AC 83C410                                  add esp, 4*4
+   105 000000AF 83F800                                  cmp eax, 0 
+   106 000000B2 0F8413030000                            je cleanup
+   107 000000B8 61                                  popad
+   108                                              case_1:
+   109 000000B9 803D[2A000000]3E                        cmp byte [sign],'>'
+   110 000000C0 7520                                    jne case_2
+   111 000000C2 60                                      pushad
+   112 000000C3 E838FFFFFF                              call indent
+   113 000000C8 68[52010000]                            push dword instruction_1
+   114 000000CD FF35[26000000]                          push dword [output_file_descriptor]
+   115 000000D3 FF15[00000000]                          call [fprintf]
+   116 000000D9 83C408                                  add esp, 4*2
+   117 000000DC 61                                      popad 
+   118 000000DD E9E4020000                              jmp next_letter
+   119                                              case_2:
+   120 000000E2 803D[2A000000]3C                        cmp byte [sign],'<'
+   121 000000E9 7520                                    jne case_3
+   122 000000EB 60                                      pushad
+   123 000000EC E80FFFFFFF                              call indent
+   124 000000F1 68[5B010000]                            push dword instruction_2
+   125 000000F6 FF35[26000000]                          push dword [output_file_descriptor]
+   126 000000FC FF15[00000000]                          call [fprintf]
+   127 00000102 83C408                                  add esp, 4*2
+   128 00000105 61                                      popad
+   129 00000106 E9BB020000                              jmp next_letter
+   130                                              case_3:
+   131 0000010B 803D[2A000000]2B                        cmp byte [sign],'+'
+   132 00000112 7520                                    jne case_4
+   133 00000114 60                                      pushad
+   134 00000115 E8E6FEFFFF                              call indent
+   135 0000011A 68[64010000]                            push dword instruction_3
+   136 0000011F FF35[26000000]                          push dword [output_file_descriptor]
+   137 00000125 FF15[00000000]                          call [fprintf]
+   138 0000012B 83C408                                  add esp, 4*2
+   139 0000012E 61                                      popad
+   140 0000012F E992020000                              jmp next_letter
+   141                                              case_4:
+   142 00000134 803D[2A000000]2D                        cmp byte [sign],'-'
+   143 0000013B 7520                                    jne case_5
+   144 0000013D 60                                      pushad
+   145 0000013E E8BDFEFFFF                              call indent
+   146 00000143 68[74010000]                            push dword instruction_4
+   147 00000148 FF35[26000000]                          push dword [output_file_descriptor]
+   148 0000014E FF15[00000000]                          call [fprintf]
+   149 00000154 83C408                                  add esp, 4*2
+   150 00000157 61                                      popad
+   151 00000158 E969020000                              jmp next_letter
+   152                                              case_5:
+   153 0000015D 803D[2A000000]2E                        cmp byte [sign],'.'
+   154 00000164 0F85CF000000                            jne case_6
+   155 0000016A 60                                      pushad
+   156 0000016B E890FEFFFF                              call indent
+   157 00000170 68[84010000]                            push dword instruction_5_1
+   158 00000175 FF35[26000000]                          push dword [output_file_descriptor]
+   159 0000017B FF15[00000000]                          call [fprintf]
+   160 00000181 83C408                                  add esp, 4*2
+   161 00000184 E877FEFFFF                              call indent
+   162 00000189 68[8C010000]                            push dword instruction_5_2
+   163 0000018E FF35[26000000]                          push dword [output_file_descriptor]
+   164 00000194 FF15[00000000]                          call [fprintf]
+   165 0000019A 83C408                                  add esp, 4*2
+   166 0000019D E85EFEFFFF                              call indent
+   167 000001A2 68[97010000]                            push dword instruction_5_3
+   168 000001A7 FF35[26000000]                          push dword [output_file_descriptor]
+   169 000001AD FF15[00000000]                          call [fprintf]
+   170 000001B3 83C408                                  add esp, 4*2
+   171 000001B6 E845FEFFFF                              call indent
+   172 000001BB 68[A5010000]                            push dword instruction_5_4
+   173 000001C0 FF35[26000000]                          push dword [output_file_descriptor]
+   174 000001C6 FF15[00000000]                          call [fprintf]
+   175 000001CC 83C408                                  add esp, 4*2
+   176 000001CF E82CFEFFFF                              call indent
+   177 000001D4 68[B5010000]                            push dword instruction_5_5
+   178 000001D9 FF35[26000000]                          push dword [output_file_descriptor]
+   179 000001DF FF15[00000000]                          call [fprintf]
+   180 000001E5 83C408                                  add esp, 4*2
+   181 000001E8 E813FEFFFF                              call indent
+   182 000001ED 68[C8010000]                            push dword instruction_5_6
+   183 000001F2 FF35[26000000]                          push dword [output_file_descriptor]
+   184 000001F8 FF15[00000000]                          call [fprintf]
+   185 000001FE 83C408                                  add esp, 4*2
+   186 00000201 E8FAFDFFFF                              call indent
+   187 00000206 68[D7010000]                            push dword instruction_5_7
+   188 0000020B FF35[26000000]                          push dword [output_file_descriptor]
+   189 00000211 FF15[00000000]                          call [fprintf]
+   190 00000217 83C408                                  add esp, 4*2
+   191 0000021A E8E1FDFFFF                              call indent
+   192 0000021F 68[E4010000]                            push dword instruction_5_8
+   193 00000224 FF35[26000000]                          push dword [output_file_descriptor]
+   194 0000022A FF15[00000000]                          call [fprintf]
+   195 00000230 83C408                                  add esp, 4*2
+   196 00000233 61                                      popad
+   197 00000234 E98D010000                              jmp next_letter
+   198                                              case_6:
+   199 00000239 803D[2A000000]2C                        cmp byte [sign], ','
+   200 00000240 0F859D000000                            jne case_7
+   201 00000246 60                                      pushad
+   202 00000247 E8B4FDFFFF                              call indent
+   203 0000024C 68[EB010000]                            push dword instruction_6_1
+   204 00000251 FF35[26000000]                          push dword [output_file_descriptor]
+   205 00000257 FF15[00000000]                          call [fprintf]
+   206 0000025D 83C408                                  add esp, 4*2
+   207 00000260 E89BFDFFFF                              call indent
+   208 00000265 68[F3010000]                            push dword instruction_6_2
+   209 0000026A FF35[26000000]                          push dword [output_file_descriptor]
+   210 00000270 FF15[00000000]                          call [fprintf]
+   211 00000276 83C408                                  add esp, 4*2
+   212 00000279 E882FDFFFF                              call indent
+   213 0000027E 68[03020000]                            push dword instruction_6_3
+   214 00000283 FF35[26000000]                          push dword [output_file_descriptor]
+   215 00000289 FF15[00000000]                          call [fprintf]
+   216 0000028F 83C408                                  add esp, 4*2
+   217 00000292 E869FDFFFF                              call indent
+   218 00000297 68[16020000]                            push dword instruction_6_4
+   219 0000029C FF35[26000000]                          push dword [output_file_descriptor]
+   220 000002A2 FF15[00000000]                          call [fprintf]
+   221 000002A8 83C408                                  add esp, 4*2
+   222 000002AB E850FDFFFF                              call indent
+   223 000002B0 68[24020000]                            push dword instruction_6_5
+   224 000002B5 FF35[26000000]                          push dword [output_file_descriptor]
+   225 000002BB FF15[00000000]                          call [fprintf]
+   226 000002C1 83C408                                  add esp, 4*2
+   227 000002C4 E837FDFFFF                              call indent
+   228 000002C9 68[31020000]                            push dword instruction_6_6
+   229 000002CE FF35[26000000]                          push dword [output_file_descriptor]
+   230 000002D4 FF15[00000000]                          call [fprintf]
+   231 000002DA 83C408                                  add esp, 4*2
+   232 000002DD 61                                      popad
+   233 000002DE E9E3000000                              jmp next_letter
+   234                                              case_7:
+   235 000002E3 803D[2A000000]5B                        cmp byte [sign],'['
+   236 000002EA 7566                                    jne case_8
+   237                                                  ;Print loop_<nr_of_loops>:
+   238 000002EC 60                                      pushad
+   239                                                  
+   240 000002ED E80EFDFFFF                              call indent
+   241 000002F2 68[38020000]                            push dword instruction_7_1
+   242 000002F7 FF35[26000000]                          push dword [output_file_descriptor]
+   243 000002FD FF15[00000000]                          call [fprintf]
+   244 00000303 83C408                                  add esp, 4*2
+   245                                                  
+   246 00000306 B800000000                              mov EAX,0
+   247 0000030B 66A1[61020000]                          mov AX,[number_of_loops]
+   248 00000311 50                                      push EAX
+   249 00000312 68[5C020000]                            push number_print_format
+   250 00000317 FF35[26000000]                          push dword [output_file_descriptor]
+   251 0000031D FF15[00000000]                          call [fprintf]
+   252 00000323 83C40C                                  add ESP,4*3
+   253 00000326 68[3E020000]                            push dword instruction_7_2
+   254 0000032B FF35[26000000]                          push dword [output_file_descriptor]
+   255 00000331 FF15[00000000]                          call [fprintf]
+   256 00000337 83C408                                  add esp, 4*2
+   257 0000033A 61                                      popad
+   258 0000033B B800000000                              mov EAX,0
+   259 00000340 66A1[61020000]                          mov AX,[number_of_loops]
+   260 00000346 FC                                      cld
+   261 00000347 66AB                                    stosw
+   262 00000349 66FF05[61020000]                        inc word [number_of_loops]
+   263 00000350 EB74                                    jmp next_letter
+   264                                              case_8:
+   265 00000352 803D[2A000000]5D                        cmp byte [sign],']'
+   266 00000359 756B                                    jne next_letter
+   267 0000035B B800000000                              mov EAX,0
+   268 00000360 668B47FE                                mov AX,[EDI-2]
+   269 00000364 60                                      pushad
+   270 00000365 E896FCFFFF                              call indent
+   271 0000036A 68[41020000]                            push dword instruction_8_1
+   272 0000036F FF35[26000000]                          push dword [output_file_descriptor]
+   273 00000375 FF15[00000000]                          call [fprintf]
+   274 0000037B 83C408                                  add esp, 4*2
+   275 0000037E E87DFCFFFF                              call indent
+   276 00000383 68[53020000]                            push dword instruction_8_2
+   277 00000388 FF35[26000000]                          push dword [output_file_descriptor]
+   278 0000038E FF15[00000000]                          call [fprintf]
+   279 00000394 83C408                                  add esp, 4*2
+   280 00000397 61                                      popad
+   281 00000398 60                                      pushad
+   282 00000399 50                                      push EAX
+   283 0000039A 68[5C020000]                            push number_print_format
+   284 0000039F FF35[26000000]                          push dword [output_file_descriptor]
+   285 000003A5 FF15[00000000]                          call [fprintf]
+   286 000003AB 83C40C                                  add ESP,4*3
+   287                                                  
+   288 000003AE 68[5F020000]                            push dword endl_print_format
+   289 000003B3 FF35[26000000]                          push dword [output_file_descriptor]
+   290 000003B9 FF15[00000000]                          call [fprintf]
+   291 000003BF 83C408                                  add esp, 4*2
+   292 000003C2 61                                      popad
+   293 000003C3 83EF02                                  sub EDI,2
+   294                                              next_letter:
+   295 000003C6 E9CBFCFFFF                          jmp bucla
+   296                                        cleanup:
+   297 000003CB 60                              pushad
+   298 000003CC 68[33010000]                    push dword end_code
+   299 000003D1 FF35[26000000]                  push dword [output_file_descriptor]
+   300 000003D7 FF15[00000000]                  call [fprintf]
+   301 000003DD 83C408                          add esp, 4*2
+   302 000003E0 61                              popad
+   303                                          
+   304 000003E1 FF35[0C000000]                  push dword [input_file_descriptor]
+   305 000003E7 FF15[00000000]                  call [fclose]
+   306 000003ED 83C404                          add esp, 4
+   307 000003F0 FF35[26000000]                   push dword [output_file_descriptor]
+   308 000003F6 FF15[00000000]                  call [fclose]
+   309 000003FC 83C404                          add esp, 4
+   310                                      final:
+   311 000003FF 6A00                        push dword 0
+   312 00000401 FF15[00000000]              call [exit]
+   313                                  
+   314                                  
+   315                                      

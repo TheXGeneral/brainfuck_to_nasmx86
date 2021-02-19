@@ -1,0 +1,214 @@
+bits 32
+global start
+extern exit,printf,scanf
+import exit msvcrt.dll
+import printf msvcrt.dll
+import scanf msvcrt.dll
+segment data use32 class=data
+   data_segment times 30000 db 0
+   format db "%c",0
+segment code use32 class=code
+start:
+   mov ESI,data_segment
+   inc byte [ESI]
+   inc byte [ESI]
+   inc byte [ESI]
+   inc byte [ESI]
+   inc byte [ESI]
+   inc byte [ESI]
+   inc byte [ESI]
+   inc byte [ESI]
+   loop_0:
+      inc ESI
+      inc byte [ESI]
+      inc byte [ESI]
+      inc byte [ESI]
+      inc byte [ESI]
+      loop_1:
+         inc ESI
+         inc byte [ESI]
+         inc byte [ESI]
+         inc ESI
+         inc byte [ESI]
+         inc byte [ESI]
+         inc byte [ESI]
+         inc ESI
+         inc byte [ESI]
+         inc byte [ESI]
+         inc byte [ESI]
+         inc ESI
+         inc byte [ESI]
+         dec ESI
+         dec ESI
+         dec ESI
+         dec ESI
+         dec byte [ESI]
+         cmp byte [ESI],0
+         jg loop_1
+      inc ESI
+      inc byte [ESI]
+      inc ESI
+      inc byte [ESI]
+      inc ESI
+      dec byte [ESI]
+      inc ESI
+      inc ESI
+      inc byte [ESI]
+      loop_2:
+         dec ESI
+         cmp byte [ESI],0
+         jg loop_2
+      dec ESI
+      dec byte [ESI]
+      cmp byte [ESI],0
+      jg loop_0
+   inc ESI
+   inc ESI
+   pushad
+   mov EAX,0
+   mov AL,[ESI]
+   push dword EAX
+   push dword format
+   call [printf]
+   add esp,4*2
+   popad
+   inc ESI
+   dec byte [ESI]
+   dec byte [ESI]
+   dec byte [ESI]
+   pushad
+   mov EAX,0
+   mov AL,[ESI]
+   push dword EAX
+   push dword format
+   call [printf]
+   add esp,4*2
+   popad
+   inc byte [ESI]
+   inc byte [ESI]
+   inc byte [ESI]
+   inc byte [ESI]
+   inc byte [ESI]
+   inc byte [ESI]
+   inc byte [ESI]
+   pushad
+   mov EAX,0
+   mov AL,[ESI]
+   push dword EAX
+   push dword format
+   call [printf]
+   add esp,4*2
+   popad
+   pushad
+   mov EAX,0
+   mov AL,[ESI]
+   push dword EAX
+   push dword format
+   call [printf]
+   add esp,4*2
+   popad
+   inc byte [ESI]
+   inc byte [ESI]
+   inc byte [ESI]
+   pushad
+   mov EAX,0
+   mov AL,[ESI]
+   push dword EAX
+   push dword format
+   call [printf]
+   add esp,4*2
+   popad
+   inc ESI
+   inc ESI
+   pushad
+   mov EAX,0
+   mov AL,[ESI]
+   push dword EAX
+   push dword format
+   call [printf]
+   add esp,4*2
+   popad
+   dec ESI
+   dec byte [ESI]
+   pushad
+   mov EAX,0
+   mov AL,[ESI]
+   push dword EAX
+   push dword format
+   call [printf]
+   add esp,4*2
+   popad
+   dec ESI
+   pushad
+   mov EAX,0
+   mov AL,[ESI]
+   push dword EAX
+   push dword format
+   call [printf]
+   add esp,4*2
+   popad
+   inc byte [ESI]
+   inc byte [ESI]
+   inc byte [ESI]
+   pushad
+   mov EAX,0
+   mov AL,[ESI]
+   push dword EAX
+   push dword format
+   call [printf]
+   add esp,4*2
+   popad
+   dec byte [ESI]
+   dec byte [ESI]
+   dec byte [ESI]
+   dec byte [ESI]
+   dec byte [ESI]
+   dec byte [ESI]
+   pushad
+   mov EAX,0
+   mov AL,[ESI]
+   push dword EAX
+   push dword format
+   call [printf]
+   add esp,4*2
+   popad
+   dec byte [ESI]
+   dec byte [ESI]
+   dec byte [ESI]
+   dec byte [ESI]
+   dec byte [ESI]
+   dec byte [ESI]
+   dec byte [ESI]
+   dec byte [ESI]
+   pushad
+   mov EAX,0
+   mov AL,[ESI]
+   push dword EAX
+   push dword format
+   call [printf]
+   add esp,4*2
+   popad
+   inc ESI
+   inc ESI
+   inc byte [ESI]
+   pushad
+   mov EAX,0
+   mov AL,[ESI]
+   push dword EAX
+   push dword format
+   call [printf]
+   add esp,4*2
+   popad
+   inc ESI
+   inc byte [ESI]
+   inc byte [ESI]
+   pushad
+   mov EAX,0
+   mov AL,[ESI]
+   push dword EAX
+   push dword format
+   call [printf]
+   add esp,4*2
+   popad
+   push dword 0
+   call [exit]
