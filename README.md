@@ -8,3 +8,4 @@
 * The program also keeps track of nested code and indent it accordingly
 * As expected the code will be read from `input.txt` and the nasm x86 code will pe printed in `converted-code.txt`
 * The Repo also contains an executable file, that should work on any Windows 10 computer, but I'm not quite sure `¯\_(ツ)_/¯`
+* The project was done just for fun, so my code is kinda spaghetti 
